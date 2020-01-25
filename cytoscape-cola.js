@@ -436,6 +436,16 @@ ColaLayout.prototype.run = function () {
     }
   }
 
+  if (options.rawAlignment) {
+    options.rawAlignment.forEach(function (alignment) {
+      constraints.push({
+        type: 'alignment',
+        axis: alignment.axis,
+        offsets: alignment.offsets
+      });
+    });
+  }
+
   // if gapInequalities variable is set add each inequality constraint to list of constraints
   if (options.gapInequalities) {
     options.gapInequalities.forEach(function (inequality) {
@@ -656,6 +666,7 @@ var defaults = {
   }, // extra spacing around nodes
   flow: undefined, // use DAG/tree flow layout if specified, e.g. { axis: 'y', minSeparation: 30 }
   alignment: undefined, // relative alignment constraints on nodes, e.g. function( node ){ return { x: 0, y: 1 } }
+  rawAlignment: undefined, // list of alignment constraints for nodes, e.g. [{"axis": "x", "offsets": [ {"node": "1","offset": "0"}, {"node": "2", "offset": "0"} ]}]
   gapInequalities: undefined, // list of inequality constraints for the gap between the nodes, e.g. [{"axis":"y", "left":node1, "right":node2, "gap":25}]
 
   // different methods of specifying edge length
