@@ -320,6 +320,16 @@ ColaLayout.prototype.run = function(){
 
   }
 
+  if ( options.rawAlignment ) {
+    options.rawAlignment.forEach( alignment => {
+        constraints.push({
+          type: 'alignment',
+          axis: alignment.axis,
+          offsets: alignment.offsets
+        });
+    });
+  }
+
   // if gapInequalities variable is set add each inequality constraint to list of constraints
   if ( options.gapInequalities ) {
     options.gapInequalities.forEach( inequality => {
